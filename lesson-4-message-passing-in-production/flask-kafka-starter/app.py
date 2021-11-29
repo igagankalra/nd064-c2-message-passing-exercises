@@ -16,6 +16,7 @@ def before_request():
     # Setting Kafka to g enables us to use this
     # in other parts of our application
     g.kafka_producer = producer
+    
 
 
 @app.route('/health')
@@ -29,7 +30,7 @@ def computers():
         return jsonify(retrieve_orders())
     elif request.method == 'POST':
         request_body = request.json
-        result = create_order(request_body)
+        create_order(request_body)
         return Response(status=202)
     else:
         raise Exception('Unsupported HTTP request type.')
